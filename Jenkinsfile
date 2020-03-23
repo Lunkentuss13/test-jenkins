@@ -3,10 +3,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mkdir build'
-                sh 'touch build/test_file.txt'
-                sh 'echo "Hello" >> build/test_file.txt'
-                archiveArtifacts 'build/test_file.txt'
+                sh 'touch test_file.txt && echo "Hello" > test_file.txt'
+                archiveArtifacts 'test_file.txt'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'cat test_file.txt'
             }
         }
     }
